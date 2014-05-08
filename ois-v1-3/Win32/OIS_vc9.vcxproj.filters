@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{59913fed-2e13-4d79-9ad9-1f85080f26f2}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Win32">
+      <UniqueIdentifier>{ddb2ce7d-0388-4f41-967e-b7c917edf0ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{33fad997-5e6b-42fc-b480-1e0a6ed5e659}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Win32">
+      <UniqueIdentifier>{107f0f75-5168-4a02-b6b0-36206a37aee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interface">
+      <UniqueIdentifier>{e412a12f-fd2a-45a5-8cbf-bae950da567b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extras">
+      <UniqueIdentifier>{3096920a-b628-4454-9f39-8678ee4eaf45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extras\WiiMote">
+      <UniqueIdentifier>{873f312a-a006-49ea-8273-1ebd433164fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extras\LIRC">
+      <UniqueIdentifier>{d3c16dde-1514-4bce-ac51-3ffefafbd53e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extras\XInput">
+      <UniqueIdentifier>{c1ade621-ece4-4c72-930e-76237c960c4b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\OISEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OISException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OISForceFeedback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OISInputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OISJoyStick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OISKeyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OISObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\Win32ForceFeedback.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\Win32InputManager.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\Win32JoyStick.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\Win32KeyBoard.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\Win32Mouse.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\extras\WiiMote\hiddevice.cpp">
+      <Filter>Extras\WiiMote</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\extras\WiiMote\OISWiiMote.cpp">
+      <Filter>Extras\WiiMote</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.cpp">
+      <Filter>Extras\WiiMote</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\extras\WiiMote\OISWiiMoteForceFeedback.cpp">
+      <Filter>Extras\WiiMote</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\extras\WiiMote\OISWiiMoteRingBuffer.cpp">
+      <Filter>Extras\WiiMote</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\extras\WiiMote\wiimote.cpp">
+      <Filter>Extras\WiiMote</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\extras\LIRC\OISLIRC.cpp">
+      <Filter>Extras\LIRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\extras\LIRC\OISLIRCFactoryCreator.cpp">
+      <Filter>Extras\LIRC</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\includes\OIS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISFactoryCreator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISInputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISJoystick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISKeyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISMouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISPrereqs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\win32\Win32ForceFeedback.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\win32\Win32InputManager.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\win32\Win32JoyStick.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\win32\Win32KeyBoard.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\win32\Win32Mouse.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\win32\Win32Prereqs.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISEffect.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISForceFeedback.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includes\OISInterface.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32\extras\WiiMote\hiddevice.h">
+      <Filter>Extras\WiiMote</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32\extras\WiiMote\OISWiiMote.h">
+      <Filter>Extras\WiiMote</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.h">
+      <Filter>Extras\WiiMote</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32\extras\WiiMote\OISWiiMoteForceFeedback.h">
+      <Filter>Extras\WiiMote</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32\extras\WiiMote\OISWiiMoteRingBuffer.h">
+      <Filter>Extras\WiiMote</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32\extras\WiiMote\wiimote.h">
+      <Filter>Extras\WiiMote</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\extras\LIRC\OISLIRC.h">
+      <Filter>Extras\LIRC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\extras\LIRC\OISLIRCFactoryCreator.h">
+      <Filter>Extras\LIRC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\extras\LIRC\OISLIRCRingBuffer.h">
+      <Filter>Extras\LIRC</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OIS.rc" />
+  </ItemGroup>
+</Project>
