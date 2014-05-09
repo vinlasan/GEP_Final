@@ -56,7 +56,59 @@ void sSceneManager::addLayerObjects(stwoDLayer *Layer, XMLElement *Element)
 	if (!Object)
 		return;
 
-	
+	for (XMLAttribute* ElementAttrib =
+		const_cast<XMLAttribute*>
+		(Element->FirstAttribute()); ElementAttrib;
+	ElementAttrib = const_cast<XMLAttribute*>(ElementAttrib->Next()))
+	{
+		std::string AttribName = ElementAttrib->Name();
+		std::string AttribValue = ElementAttrib->Value();
+		if (AttribName == "resourceID")
+		{
+			ResourceManager* ResourceManager = ResourceManager::GetResourceManager();
+
+			// NOTE: Removed the reference to the Layer into the cRenderResource with the changes.
+			//Object->setResourceObject((RenderResource*)ResourceManager->findResourcebyID(atoi(AttribValue.c_str())));
+		}
+
+		if (AttribName == "posx")
+		{
+			Object->m_PosX = atof(AttribValue.c_str());
+		}
+
+		if (AttribName == "posy")
+		{
+			Object->m_PosY = atof(AttribValue.c_str());
+		}
+
+		if (AttribName == "colorkey")
+		{
+			if (AttribValue == "true")
+				Object->m_bColorKeyEnabled = true;
+			else
+				Object->m_bColorKeyEnabled = false;
+		}
+
+		if (AttribName == "r")
+		{
+			r = atoi(AttribValue.c_str());
+		}
+
+		if (AttribName == "g")
+		{
+			g = atoi(AttribValue.c_str());
+		}
+
+		if (AttribName == "b")
+		{
+			b = atoi(AttribValue.c_str());
+		}
+	}
+
+	if (Object->m_bColorKeyEnabled)
+		Object->setColorKey(r, g, b);
+
+	Layer->m_SceneObjects.push_back(Object);
 }
 
 
