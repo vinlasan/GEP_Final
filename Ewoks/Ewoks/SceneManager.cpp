@@ -8,6 +8,11 @@ bool compareLayerOrder(const stwoDLayer *lhs, const stwoDLayer *rhs)
 	return lhs->m_ZOrder < rhs->m_ZOrder;
 }
 
+void sSceneListener::InputEvent(std::string* InputMessage)
+{
+
+}
+
 stwoDLayer::stwoDLayer()
 {
 	m_Visible = true;
@@ -56,9 +61,68 @@ void sSceneManager::addLayerObjects(stwoDLayer *Layer, XMLElement *Element)
 	if (!Object)
 		return;
 
-	
+	for (XMLAttribute* ElementAttrib =
+		const_cast<XMLAttribute*>
+		(Element->FirstAttribute()); ElementAttrib;
+	ElementAttrib = const_cast<XMLAttribute*>(ElementAttrib->Next()))
+	{
+		std::string AttribName = ElementAttrib->Name();
+		std::string AttribValue = ElementAttrib->Value();
+		if (AttribName == "resourceID")
+		{
+			ResourceManager* ResourceManager = ResourceManager::GetResourceManager();
+		}
+
+		if (AttribName == "posx")
+		{
+			Object->m_PosX = atof(AttribValue.c_str());
+		}
+
+		if (AttribName == "posy")
+		{
+			Object->m_PosY = atof(AttribValue.c_str());
+		}
+
+		if (AttribName == "colorkey")
+		{
+			if (AttribValue == "true")
+				Object->m_bColorKeyEnabled = true;
+			else
+				Object->m_bColorKeyEnabled = false;
+		}
+
+		if (AttribName == "r")
+		{
+			r = atoi(AttribValue.c_str());
+		}
+
+		if (AttribName == "g")
+		{
+			g = atoi(AttribValue.c_str());
+		}
+
+		if (AttribName == "b")
+		{
+			b = atoi(AttribValue.c_str());
+		}
+	}
+
+	/*if (Object->m_bColorKeyEnabled)
+		Object->setColorKey(r, g, b);*/
+
+	Layer->m_SceneObjects.push_back(Object);
 }
 
+bool sSceneManager::checkCollision(SDL_Rect* A, SDL_Rect* B)
+{
+	bool isColliding;
+
+	if (SDL_HasIntersection(A, B))
+		isColliding = true;
+	else isColliding = false;
+
+	return isColliding;
+}
 
 void sSceneManager::checkTimerExpired()
 {

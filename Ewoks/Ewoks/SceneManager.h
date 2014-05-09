@@ -24,6 +24,7 @@ public:
 	SCENE_EVENT_TYPE m_ListenFor;
 
 	virtual void Event(sSceneManager* Manager, void* customData) const = 0;
+	void InputEvent(std::string* InputMessage);
 };
 
 class sTimer
@@ -69,6 +70,11 @@ class sSceneObject
 private:
 protected:
 public:
+	float m_PosX, m_PosY;
+	SDL_Rect m_RenderRect;
+	SDL_Color m_ColorKey;
+	bool m_bColorKeyEnabled;
+	bool m_bVisible;
 };
 
 class stwoDLayer
@@ -102,6 +108,8 @@ public:
 
 	void addTimer(unsigned int ID, DWORD Interval);
 	void addListener(sSceneListener* Object);
+
+	bool checkCollision(SDL_Rect* A, SDL_Rect* B);
 
 	void update();
 };
