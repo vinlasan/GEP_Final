@@ -98,13 +98,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\SDL2-2.0.1\include;$(SolutionDir)..\ois-v1-3\includes;$(SolutionDir)..\tinyxml2-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\SDL2-2.0.1\include;$(SolutionDir)..\ois-v1-3\includes;$(SolutionDir)..\tinyxml2-master;$(SolutionDir)..\SDL2_image-2.0.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\tinyxml2-master\tinyxml2\bin\x64-Debug-Dll;$(SolutionDir)..\ois-v1-3\lib64;$(SolutionDir)..\SDL2-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;OIS_d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\tinyxml2-master\tinyxml2\bin\x64-Debug-Dll;$(SolutionDir)..\ois-v1-3\lib64;$(SolutionDir)..\SDL2-2.0.1\lib\x64;$(SolutionDir)..\SDL2_image-2.0.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;OIS_d.lib;tinyxml2.lib;WINMM.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)..\tinyxml2-master\tinyxml2\bin\x64-Debug-Dll\*.dll" "$(OutDir)"
@@ -149,20 +149,21 @@ xcopy /Y "$(SolutionDir)..\SDL2-2.0.1\lib\x64\*.dll" "$(OutDir)"</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Ewoks\Ewoks\EngineObject.h" />
-    <ClInclude Include="..\..\..\..\Ewoks\Ewoks\InputListener.h" />
-    <ClInclude Include="..\..\..\..\Ewoks\Ewoks\InputManager.h" />
-    <ClInclude Include="..\..\..\..\Ewoks\Ewoks\MyInputListener.h" />
-    <ClInclude Include="..\..\..\..\Ewoks\Ewoks\ResourceManager.h" />
-    <ClInclude Include="..\..\..\..\Ewoks\Ewoks\SceneManager.h" />
+    <ClInclude Include="EngineObject.h" />
+    <ClInclude Include="InputListener.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MyInputListener.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Ewoks\Ewoks\InputManager.cpp" />
-    <ClCompile Include="..\..\..\..\Ewoks\Ewoks\MyInputListener.cpp" />
-    <ClCompile Include="..\..\..\..\Ewoks\Ewoks\ResourceManager.cpp" />
     <ClCompile Include="Ewoks.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="MyInputListener.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
