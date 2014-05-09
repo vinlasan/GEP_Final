@@ -8,6 +8,11 @@ bool compareLayerOrder(const stwoDLayer *lhs, const stwoDLayer *rhs)
 	return lhs->m_ZOrder < rhs->m_ZOrder;
 }
 
+void sSceneListener::InputEvent(std::string* InputMessage)
+{
+
+}
+
 stwoDLayer::stwoDLayer()
 {
 	m_Visible = true;
@@ -66,9 +71,6 @@ void sSceneManager::addLayerObjects(stwoDLayer *Layer, XMLElement *Element)
 		if (AttribName == "resourceID")
 		{
 			ResourceManager* ResourceManager = ResourceManager::GetResourceManager();
-
-			// NOTE: Removed the reference to the Layer into the cRenderResource with the changes.
-			//Object->setResourceObject((RenderResource*)ResourceManager->findResourcebyID(atoi(AttribValue.c_str())));
 		}
 
 		if (AttribName == "posx")
@@ -105,12 +107,22 @@ void sSceneManager::addLayerObjects(stwoDLayer *Layer, XMLElement *Element)
 		}
 	}
 
-	if (Object->m_bColorKeyEnabled)
-		Object->setColorKey(r, g, b);
+	/*if (Object->m_bColorKeyEnabled)
+		Object->setColorKey(r, g, b);*/
 
 	Layer->m_SceneObjects.push_back(Object);
 }
 
+bool sSceneManager::checkCollision(SDL_Rect* A, SDL_Rect* B)
+{
+	bool isColliding;
+
+	if (SDL_HasIntersection(A, B))
+		isColliding = true;
+	else isColliding = false;
+
+	return isColliding;
+}
 
 void sSceneManager::checkTimerExpired()
 {
