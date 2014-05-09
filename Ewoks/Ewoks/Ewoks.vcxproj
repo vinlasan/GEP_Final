@@ -153,6 +153,8 @@ xcopy /Y "$(SolutionDir)..\SDL2-2.0.1\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="InputListener.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MyInputListener.h" />
+    <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="RenderObject.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -162,6 +164,7 @@ xcopy /Y "$(SolutionDir)..\SDL2-2.0.1\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Ewoks.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MyInputListener.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">

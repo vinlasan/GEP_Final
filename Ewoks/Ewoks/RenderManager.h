@@ -3,6 +3,9 @@
 #include <iostream>
 #include <string>
 #include <SDL.h>
+#include <SDL_syswm.h>
+#include <windows.h>
+
 using namespace std;
 
 class Render{
@@ -17,6 +20,8 @@ public:
 	~Render();
 
 	bool Initialize();
+
+	static Render* GetRenderManager();
 
 	//Error Logger
 	void logSDLError(ostream &os, const string &msg);
@@ -34,4 +39,15 @@ public:
 	void renderAllObjects();
 
 	void clean();
+
+	HWND GetWindowHandle();
+
+protected:
+	static Render m_RenderManager;
+	HWND m_WindowHandle;
+	SDL_SysWMinfo m_inf;
+
+	//std::list<RenderObject*> m_RenderObjects;
+
+
 };

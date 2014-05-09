@@ -33,6 +33,10 @@ bool Render::Initialize(){
 		logSDLError(cout, "CreateRenderer");
 		return false;
 	}
+
+	SDL_GetWindowWMInfo(win, &m_inf);
+
+	m_WindowHandle = m_inf.info.win.window;
 	
 
 	return true;
@@ -40,19 +44,25 @@ bool Render::Initialize(){
 
 }
 
-void Render:: logSDLError(ostream &os, const string &msg){
+void Render:: logSDLError(ostream &os, const string &msg)
+{
 	os << msg << " error: " << SDL_GetError() << endl;
 }
 
 
-SDL_Texture* Render :: loadTexture(const string &file, SDL_Renderer *ren){
+SDL_Texture* Render :: loadTexture(const string &file, SDL_Renderer *ren)
+{
 	SDL_Texture *texture = nullptr;
+
 	//load image
 	SDL_Surface *loadedImage = SDL_LoadBMP(file.c_str());
+
 	//convert to tecture and return the texture
-	if (loadedImage != nullptr){
+	if (loadedImage != nullptr)
+	{
 		texture = SDL_CreateTextureFromSurface(ren, loadedImage);
 		SDL_FreeSurface(loadedImage);
+
 		//make sure converting success
 		if (texture == nullptr)
 			logSDLError(cout, "CreateTextureFromSurface");
@@ -63,31 +73,38 @@ SDL_Texture* Render :: loadTexture(const string &file, SDL_Renderer *ren){
 	return texture;
 }
 
-void Render :: renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y){
+void Render :: renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y)
+{
 	//setup the destination rectangle position
 	SDL_Rect pos;
 	pos.x = x;
 	pos.y = y;
+
 	//Query texture to get its width and height to use
 	SDL_QueryTexture(tex, NULL, NULL, &pos.w, &pos.h);
 	SDL_RenderCopy(ren, tex, NULL, &pos);
 }
 
-void Render :: renderAllObjects(){
-
-	
-
-	
-
-
-	
+void Render :: renderAllObjects()
+{
 	SDL_RenderPresent(ren);
 	SDL_Delay(3000);
 }
 
-void Render :: clean(){
+void Render :: clean()
+{
 	//SDL_DestroyTexture("fileName");
 	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(win);
 	SDL_Quit();
+}
+
+Render* Render::GetRenderManager()
+{
+	return &m_RenderManager;
+}
+
+HWND Render::GetWindowHandle()
+{
+	return m_WindowHandle;
 }
