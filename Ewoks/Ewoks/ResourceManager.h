@@ -1,6 +1,7 @@
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
+#include "EngineObject.h"
 #include <iostream>
 #include <list>
 #include <map>
@@ -8,7 +9,7 @@
 
 #include <tinyxml2.h>
 
-class Resource
+class Resource : public EngineObject
 {
 public:
 	unsigned int m_ResourceID;

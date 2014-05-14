@@ -1,40 +1,84 @@
+#include "stdafx.h"
 #include "RenderManager.h"
+#include "RenderObject.h"
 
-Render::Render(){
+RenderManager RenderManager::m_RenderManager;
+
+RenderResource::RenderResource() : Resource()
+{
+	m_Texture = NULL;
+}
+
+RenderResource::~RenderResource()
+{
+	unload();
+}
+
+void RenderResource::load()
+{
+	unload();
+
+	SDL_Renderer* curRend = RenderManager::GetRenderManager()->m_Renderer;
+
+	m_Texture = IMG_LoadTexture(RenderManager::GetRenderManager()->m_Renderer, m_FileName.c_str());
+
+	m_bLoaded = true;
+}
+
+void RenderResource::unload()
+{
+	if(m_Texture)
+	{
+		SDL_DestroyTexture(m_Texture);
+		m_Texture = NULL;
+	}
+
+	m_bLoaded = false;
+}
+
+
+RenderManager::RenderManager()
+{
 	this->SCREEN_WIDTH = 640;
 	this->SCREEN_HEIGHT = 480;
 }
 
-Render::~Render(){
+RenderManager::~RenderManager()
+{
 }
 
-bool Render::Initialize(){
+bool RenderManager::Initialize()
+{
 
 	//Error
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	{
 		logSDLError(cout, "SDL_Init"); 
 		return false;
 	}
 	
 
 	//Window
-	win = SDL_CreateWindow("window", 100, 100, SCREEN_WIDTH,
+	m_Window = SDL_CreateWindow("window", 100, 100, SCREEN_WIDTH,
 		SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	if (win == nullptr){
+
+	if (m_Window == nullptr)
+	{
 		logSDLError(cout, "CreateWindow");
 		return false;
 	}
 	
 
 	//Renderer
-	ren = SDL_CreateRenderer(win, -1,
-		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (ren == nullptr){
+	m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+	if (m_Renderer == nullptr)
+	{
 		logSDLError(cout, "CreateRenderer");
 		return false;
 	}
 
-	SDL_GetWindowWMInfo(win, &m_inf);
+	SDL_GetWindowWMInfo(m_Window, &m_inf);
 
 	m_WindowHandle = m_inf.info.win.window;
 	
@@ -44,13 +88,13 @@ bool Render::Initialize(){
 
 }
 
-void Render:: logSDLError(ostream &os, const string &msg)
+void RenderManager:: logSDLError(ostream &os, const string &msg)
 {
 	os << msg << " error: " << SDL_GetError() << endl;
 }
 
 
-SDL_Texture* Render :: loadTexture(const string &file, SDL_Renderer *ren)
+SDL_Texture* RenderManager :: loadTexture(const string &file, SDL_Renderer *ren)
 {
 	SDL_Texture *texture = nullptr;
 
@@ -73,7 +117,7 @@ SDL_Texture* Render :: loadTexture(const string &file, SDL_Renderer *ren)
 	return texture;
 }
 
-void Render :: renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y)
+void RenderManager :: renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y)
 {
 	//setup the destination rectangle position
 	SDL_Rect pos;
@@ -85,26 +129,26 @@ void Render :: renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y)
 	SDL_RenderCopy(ren, tex, NULL, &pos);
 }
 
-void Render :: renderAllObjects()
+void RenderManager :: renderAllObjects()
 {
-	SDL_RenderPresent(ren);
+	SDL_RenderPresent(m_Renderer);
 	SDL_Delay(3000);
 }
 
-void Render :: clean()
+void RenderManager :: clean()
 {
 	//SDL_DestroyTexture("fileName");
-	SDL_DestroyRenderer(ren);
-	SDL_DestroyWindow(win);
+	SDL_DestroyRenderer(m_Renderer);
+	SDL_DestroyWindow(m_Window);
 	SDL_Quit();
 }
 
-Render* Render::GetRenderManager()
+RenderManager* RenderManager::GetRenderManager()
 {
 	return &m_RenderManager;
 }
 
-HWND Render::GetWindowHandle()
+HWND RenderManager::GetWindowHandle()
 {
 	return m_WindowHandle;
 }

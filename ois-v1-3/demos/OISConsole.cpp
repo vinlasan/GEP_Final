@@ -355,7 +355,7 @@ void doStartup()
 	try
 	{
 		//This demo uses at most 4 joysticks - use old way to create (i.e. disregard vendor)
-		int numSticks = std::min(g_InputManager->getNumberOfDevices(OISJoyStick), 4);
+		int numSticks = std::fmin(g_InputManager->getNumberOfDevices(OISJoyStick), 4);
 		for( int i = 0; i < numSticks; ++i )
 		{
 			g_joys[i] = (JoyStick*)g_InputManager->createInputObject( OISJoyStick, true );

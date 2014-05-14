@@ -15,10 +15,14 @@
 #include "OIS.h"
 #include "InputManager.h"
 
+#ifdef main
+# undef main
+#endif
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	ResourceManager* resourceManager = ResourceManager::GetResourceManager();
-	Render* renderManager = Render::GetRenderManager();
+	RenderManager* renderManager = RenderManager::GetRenderManager();
 	sSceneManager* sceneManager = new sSceneManager();
 
 	if (renderManager->Initialize())
@@ -34,10 +38,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	inputMan.Init(renderManager->GetWindowHandle());
 
 	InputListener* inListener;
-	inputMan.AddListener(inListener);
+	//inputMan.AddListener(inListener);
 
 
 	resourceManager->loadFromXMLFile("ResourceTree.xml");
+
+	SDL_RenderClear(renderManager->m_Renderer);
+	
+	renderManager->renderAllObjects();
+
+	system("PAUSE");
 
 
 	return 0;

@@ -1,9 +1,29 @@
 #ifndef RENDEROBJECT_H
 #define RENDEROBJECT_H
 
+#include "EngineObject.h"
+#include "ResourceManager.h"
 #include "SDL.h"
 
-class RenderObject
+class RenderResource : public Resource
+{
+public:
+	SDL_Texture* m_Texture;
+	SDL_Renderer* m_Renderer;
+
+	RenderResource();
+	~RenderResource();
+	void load();
+	void unload();
+
+protected:
+
+private:
+
+
+};
+
+class RenderObject : public EngineObject
 {
 private:
 

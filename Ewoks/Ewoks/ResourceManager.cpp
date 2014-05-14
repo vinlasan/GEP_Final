@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "ResourceManager.h"
 
+ResourceManager ResourceManager::m_ResourceManager;
+
+ResourceManager* ResourceManager::GetResourceManager()
+{
+	return &m_ResourceManager;
+}
+
 bool ResourceManager::loadFromXMLFile(std::string FileName)
 {
 	tinyxml2::XMLDocument doc(FileName.c_str());

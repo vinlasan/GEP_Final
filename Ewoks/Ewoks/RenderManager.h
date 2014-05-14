@@ -3,25 +3,26 @@
 #include <iostream>
 #include <string>
 #include <SDL.h>
+#include <SDL_image.h>
 #include <SDL_syswm.h>
 #include <windows.h>
 
 using namespace std;
 
-class Render{
+class RenderManager{
 public:
 	int SCREEN_WIDTH ;
 	int SCREEN_HEIGHT;
-	SDL_Window *win;
-	SDL_Renderer *ren;
+	SDL_Window* m_Window;
+	SDL_Renderer* m_Renderer;
 	string filenNme;
 
-	Render();
-	~Render();
+	RenderManager();
+	~RenderManager();
 
 	bool Initialize();
 
-	static Render* GetRenderManager();
+	static RenderManager* GetRenderManager();
 
 	//Error Logger
 	void logSDLError(ostream &os, const string &msg);
@@ -43,7 +44,7 @@ public:
 	HWND GetWindowHandle();
 
 protected:
-	static Render m_RenderManager;
+	static RenderManager m_RenderManager;
 	HWND m_WindowHandle;
 	SDL_SysWMinfo m_inf;
 
