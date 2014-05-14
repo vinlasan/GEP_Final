@@ -108,7 +108,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)..\tinyxml2-master\tinyxml2\bin\x64-Debug-Dll\*.dll" "$(OutDir)"
-xcopy /Y "$(SolutionDir)..\SDL2-2.0.1\lib\x64\*.dll" "$(OutDir)"</Command>
+xcopy /Y "$(SolutionDir)..\SDL2-2.0.1\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)..\SDL2_image-2.0.0\lib\x64\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
