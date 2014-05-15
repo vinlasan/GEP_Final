@@ -34,14 +34,16 @@ int _tmain(int argc, _TCHAR* argv[])
 		printf( "Unable to Initialize: %s\n", SDL_GetError());
 	}
 
+	resourceManager->loadFromXMLFile("ResourceTree.xml");
+	sceneManager->loadFromXMLFile("SceneTree.xml");
+	sceneManager->addTimer(0, 2000);
+
+
 	InputManager inputMan;
 	inputMan.Init(renderManager->GetWindowHandle());
 
 	InputListener* inListener;
 	//inputMan.AddListener(inListener);
-
-
-	resourceManager->loadFromXMLFile("ResourceTree.xml");
 
 	SDL_RenderClear(renderManager->m_Renderer);
 	
