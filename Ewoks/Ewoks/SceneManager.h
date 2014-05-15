@@ -11,6 +11,9 @@
 #include "tinyxml2.h"
 #include "ResourceManager.h"
 #include <SDL.h>
+#include "EngineObject.h"
+#include "RenderResource.h"
+#include "RenderObject.h"
 
 using namespace tinyxml2;
 
@@ -37,35 +40,13 @@ public:
 	DWORD m_StartTime;
 	DWORD m_Interval;
 	bool m_Expired;
-
-	sTimer()
-	{
-		m_ID = 0;
-		m_StartTime = 0;
-		m_Interval = 0;
-		m_Expired = false;
-	}
-
-	void start()
-	{
-		m_StartTime = timeGetTime();
-		m_Expired = false;
-	}
-
-	void update()
-	{
-		if (m_Expired)
-			return;
-		DWORD ElapsedTime = timeGetTime() - m_StartTime;
-
-		if (ElapsedTime >= m_Interval)
-		{
-			m_Expired = true;
-		}
-	}
+	sTimer();
+	void start();
+	void update();
+	
 };
 
-class sSceneObject
+class sSceneObject : public RenderObject
 {
 private:
 protected:
@@ -74,7 +55,9 @@ public:
 	SDL_Rect m_RenderRect;
 	SDL_Color m_ColorKey;
 	bool m_bColorKeyEnabled;
+	RenderResource *m_RenderResource;
 	bool m_bVisible;
+	void update();
 };
 
 class stwoDLayer

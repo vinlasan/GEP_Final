@@ -3,6 +3,7 @@
 
 #include "EngineObject.h"
 #include "ResourceManager.h"
+#include "RenderResource.h"
 #include "SDL.h"
 
 class RenderManager;
@@ -15,19 +16,20 @@ protected:
 
 public:
 	//Render Resource?
+	RenderResource* renderResource;
 
 	SDL_Rect m_RenderRect;
 	float m_PosX;
 	float m_PosY;
 	bool m_bVisible;
 	SDL_Color m_ColorKey;
-
+	bool m_ColorKeyEnabled;
 
 	RenderObject();
-	void setResourceObject();
+	void setResourceObject(RenderResource* res);
 	void setColorKey(unsigned int r, unsigned intg, unsigned intb);
 	virtual void update() {};
-	virtual void HandleMessage(Telegram *telegram);
+	//virtual void HandleMessage(Telegram *telegram);
 };
 
 

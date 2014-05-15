@@ -17,6 +17,7 @@
 #include "MyInputListener.h"
 #include "Messenger.h"
 #include "RenderObject.h"
+#include "RenderResource.h"
 
 //For testing messenger
 
@@ -40,39 +41,40 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	resourceManager->loadFromXMLFile("ResourceTree.xml");
-	sceneManager->loadFromXMLFile("SceneTree.xml");
-	sceneManager->addTimer(0, 2000);
+	
+	//Messenger::GetMessenger().AddListener(new TestObj());
 
+	//TODO add rendering loop here
+	for (size_t i = 0; i < resourceManager->getResourceCount(); i++)
+	{
+
+		RenderObject* renderObject = new RenderObject();
+		renderObject->setResourceObject((RenderResource*)resourceManager->findResourcebyID(i + 1));
+		renderManager->m_RenderObjects.push_back(renderObject);
+	}
+
+	sceneManager->loadFromXMLFile("SceneTree.xml");
+	renderManager->m_SceneManager = sceneManager;
 
 	InputManager inputMan;
 	inputMan.Init(renderManager->GetWindowHandle());
 
 	MyInputListener* myInputListener = new MyInputListener();
 	inputMan.AddListener(myInputListener);
-	
-	//Messenger::GetMessenger().AddListener(new TestObj());
 
-	SDL_RenderClear(renderManager->m_Renderer);
-	
+	sceneManager->addTimer(0, 2000);
+
 	renderManager->renderAllObjects();
 
-	//TODO add rendering loop here
-	for (size_t i = 0; i < resourceManager->getResourceCount(); i++)
-	{
-
-		RenderObject* RenderObject = new RenderObject();
-		//RenderObject->setResourceObject((RenderResource*)ResourceManager->findResourcebyID(i + 1));
-		//renderManager->RenderObjects.push_back(RenderObject);
-	}
-
-	while (true)
+	while (renderManager->update())
 	{
 		inputMan.Update();
 		Messenger::GetMessenger().Send();
+		sceneManager->update();
 	}
-
-	system("PAUSE");
-
+	SDL_RenderClear(renderManager->m_Renderer);
+	//system("PAUSE");
+	
 
 	return 0;
 }

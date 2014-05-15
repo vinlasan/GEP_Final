@@ -8,8 +8,12 @@
 #include <windows.h>
 #include <tinyxml2.h>
 #include "ResourceManager.h"
+#include "RenderManager.h"
 
 using namespace std;
+
+class RenderObject;
+class sSceneManager;
 
 class RenderManager{
 public:
@@ -18,6 +22,7 @@ public:
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
 	string filenNme;
+	std::list<RenderObject*> m_RenderObjects;
 
 	RenderManager();
 	~RenderManager();
@@ -25,6 +30,8 @@ public:
 	bool Initialize();
 
 	static RenderManager* GetRenderManager();
+
+	sSceneManager *m_SceneManager;
 
 	//Error Logger
 	void logSDLError(ostream &os, const string &msg);
@@ -41,7 +48,10 @@ public:
 
 	void renderAllObjects();
 
+	void renderScene();
+
 	void clean();
+	bool update();
 
 	HWND GetWindowHandle();
 

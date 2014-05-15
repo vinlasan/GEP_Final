@@ -9,6 +9,27 @@ ResourceManager* ResourceManager::GetResourceManager()
 	return &m_ResourceManager;
 }
 
+Resource* ResourceManager::findResourcebyID(unsigned int UID)
+{
+
+	//Search through scopes
+	for (auto &it : m_Resources)
+	{
+		if (!it.second.empty())
+		{
+			//Search through resources of scope
+			for (auto &list_it : it.second)
+			{
+				//If matches ID
+				if (list_it->m_ResourceID == UID)
+					return list_it;
+			}
+		}
+	}
+
+	return NULL;
+}
+
 bool ResourceManager::loadFromXMLFile(std::string FileName)
 {
 	tinyxml2::XMLDocument doc(FileName.c_str());

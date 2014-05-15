@@ -13,6 +13,32 @@ void sSceneListener::InputEvent(std::string* InputMessage)
 
 }
 
+sTimer::sTimer()
+{
+	m_ID = 0;
+	m_StartTime = 0;
+	m_Interval = 0;
+	m_Expired = false;
+}
+
+void sTimer::start()
+{
+	m_StartTime = timeGetTime();
+	m_Expired = false;
+}
+
+void sTimer::update()
+{
+	if (m_Expired)
+		return;
+	DWORD ElapsedTime = timeGetTime() - m_StartTime;
+
+	if (ElapsedTime >= m_Interval)
+	{
+		m_Expired = true;
+	}
+}
+
 stwoDLayer::stwoDLayer()
 {
 	m_Visible = true;
@@ -70,7 +96,8 @@ void sSceneManager::addLayerObjects(stwoDLayer *Layer, XMLElement *Element)
 		std::string AttribValue = ElementAttrib->Value();
 		if (AttribName == "resourceID")
 		{
-			ResourceManager* ResourceManager = ResourceManager::GetResourceManager();
+			ResourceManager* resourceManager = ResourceManager::GetResourceManager();
+			Object->setResourceObject((RenderResource*)resourceManager->findResourcebyID(atoi(AttribValue.c_str())));
 		}
 
 		if (AttribName == "posx")
@@ -258,4 +285,9 @@ void sSceneManager::addListener(sSceneListener* Object)
 void sSceneManager::sortLayers()
 {
 	m_Layers.sort(compareLayerOrder);
+}
+
+void sSceneObject::update()
+{
+
 }

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "RenderManager.h"
 #include "RenderResource.h"
+#include "SceneManager.h"	
 
 RenderManager RenderManager::m_RenderManager;
 
@@ -87,11 +88,77 @@ bool RenderManager::Initialize()
 
 }
 
+bool RenderManager::update()
+{
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		// check for messages
+		switch (event.type)
+		{
+			// exit if the window is closed
+		case SDL_QUIT:
+			return false;
+
+		case SDL_WINDOWEVENT:
+
+			SDL_GetWindowSize(this->m_Window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
+			break;
+
+		} // end switch
+	} // end of message processing
+
+	// clear screen
+	// SDL_RenderClear(m_Renderer);
+
+
+	renderScene();
+
+	//Call frame listeners
+	renderAllObjects();
+
+
+	return true;
+}
+
 void RenderManager:: logSDLError(ostream &os, const string &msg)
 {
 	os << msg << " error: " << SDL_GetError() << endl;
 }
 
+void RenderManager::renderScene()
+{
+	if (!m_SceneManager)
+		return;
+
+
+	for (auto* Layer : m_SceneManager->m_Layers)
+	{
+		/*if (Layer->m_Name == "layer2")*/
+
+		if (!Layer->m_Visible)
+			continue;
+
+		for (auto* Object : Layer->m_SceneObjects)
+		{
+			if (Object->m_bVisible)
+			{
+				Object->update();
+				SDL_Rect Pos;
+
+				Pos.x = int(Layer->m_PosX) + int(Object->m_PosX);
+				Pos.y = int(Layer->m_PosY) + int(Object->m_PosY);
+				Pos.w = int(Object->m_RenderRect.w);
+				Pos.h = int(Object->m_RenderRect.h);
+				
+
+				SDL_RenderCopy(this->m_Renderer, Object->m_RenderResource->m_Texture,
+					&Object->m_RenderRect, &Pos);
+			}
+
+		}
+	}
+}
 
 SDL_Texture* RenderManager :: loadTexture(const string &file)
 {

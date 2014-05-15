@@ -47,6 +47,8 @@ public:
 
 	const unsigned int getResourceCount() { return m_ResourceCount; }
 
+	Resource* findResourcebyID(unsigned int UID);
+
 protected:
 	static ResourceManager m_ResourceManager;
 	unsigned int m_ResourceCount;
