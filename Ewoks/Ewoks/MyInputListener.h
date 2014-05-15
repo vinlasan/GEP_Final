@@ -2,11 +2,17 @@
 #define MY_INPUT_LISTENER
 
 #include "InputListener.h"
+#include "Telegram.h"
 
 class MyInputListener : public InputListener
 {
 private:
-	bool assigned;
+	bool mainKey;
+	bool altKey;
+
+	Telegram *moveLeft = new Telegram(5);
+	Telegram *moveRight = new Telegram(-5);
+
 public:
 	MyInputListener();
 	bool keyPressed(const OIS::KeyEvent &e);

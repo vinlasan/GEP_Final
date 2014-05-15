@@ -153,6 +153,8 @@ xcopy /Y "$(SolutionDir)..\SDL2_image-2.0.0\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="EngineObject.h" />
     <ClInclude Include="InputListener.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MessageListener.h" />
+    <ClInclude Include="Messenger.h" />
     <ClInclude Include="MyInputListener.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="RenderObject.h" />
@@ -160,10 +162,14 @@ xcopy /Y "$(SolutionDir)..\SDL2_image-2.0.0\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Telegram.h" />
+    <ClInclude Include="TestObj.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EngineObject.cpp" />
     <ClCompile Include="Ewoks.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Messenger.cpp" />
     <ClCompile Include="MyInputListener.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

@@ -152,6 +152,11 @@ void sSceneManager::update()
 	checkTimerExpired();
 }
 
+bool sSceneManager::loadFromXMLFile(std::string fileName)
+{
+	//TODO implement loadFromXMLFile this is here so project builds.
+	return true;
+}
 
 void sSceneManager::addTimer(unsigned int ID, DWORD Interval)
 {

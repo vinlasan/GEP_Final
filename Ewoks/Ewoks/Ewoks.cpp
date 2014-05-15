@@ -14,6 +14,11 @@
 #include "SceneManager.h"
 #include "OIS.h"
 #include "InputManager.h"
+#include "MyInputListener.h"
+#include "Messenger.h"
+
+//For testing messenger
+#include "TestObj.h"
 
 #ifdef main
 # undef main
@@ -42,12 +47,21 @@ int _tmain(int argc, _TCHAR* argv[])
 	InputManager inputMan;
 	inputMan.Init(renderManager->GetWindowHandle());
 
-	InputListener* inListener;
-	//inputMan.AddListener(inListener);
+	MyInputListener* myInputListener = new MyInputListener();
+	inputMan.AddListener(myInputListener);
+	
+	Messenger::GetMessenger().AddListener(new TestObj());
 
 	SDL_RenderClear(renderManager->m_Renderer);
 	
 	renderManager->renderAllObjects();
+
+	//TODO add rendering loop here
+	while (true)
+	{
+		inputMan.Update();
+		Messenger::GetMessenger().Send();
+	}
 
 	system("PAUSE");
 

@@ -1,11 +1,14 @@
 #include "stdafx.h"
 #include "MyInputListener.h"
+#include "Telegram.h"
+#include "Messenger.h"
 
 // TODO Make Delegate for sending bools to correct function
 // function sets bool to true, and class receiving message does something
 MyInputListener::MyInputListener()
 {
-
+	mainKey = false;
+	altKey = false;
 }
 
 bool MyInputListener::keyPressed(const OIS::KeyEvent &e)
@@ -14,9 +17,11 @@ bool MyInputListener::keyPressed(const OIS::KeyEvent &e)
 	{
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
+		Messenger::GetMessenger().AddMessage(moveLeft);
 		break;
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
+		Messenger::GetMessenger().AddMessage(moveRight);
 		break;
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
@@ -37,9 +42,11 @@ bool MyInputListener::keyReleased(const OIS::KeyEvent &e)
 	{
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
+		Messenger::GetMessenger().RemoveMessage(moveLeft);
 		break;
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
+		Messenger::GetMessenger().RemoveMessage(moveRight);
 		break;
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
