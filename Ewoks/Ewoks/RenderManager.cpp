@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RenderManager.h"
-#include "RenderObject.h"
+#include "RenderResource.h"
 
 RenderManager RenderManager::m_RenderManager;
 
@@ -35,7 +35,6 @@ void RenderResource::unload()
 
 	m_bLoaded = false;
 }
-
 
 RenderManager::RenderManager()
 {
@@ -94,7 +93,7 @@ void RenderManager:: logSDLError(ostream &os, const string &msg)
 }
 
 
-SDL_Texture* RenderManager :: loadTexture(const string &file, SDL_Renderer *ren)
+SDL_Texture* RenderManager :: loadTexture(const string &file)
 {
 	SDL_Texture *texture = nullptr;
 
@@ -104,7 +103,7 @@ SDL_Texture* RenderManager :: loadTexture(const string &file, SDL_Renderer *ren)
 	//convert to tecture and return the texture
 	if (loadedImage != nullptr)
 	{
-		texture = SDL_CreateTextureFromSurface(ren, loadedImage);
+		texture = SDL_CreateTextureFromSurface(m_Renderer, loadedImage);
 		SDL_FreeSurface(loadedImage);
 
 		//make sure converting success
@@ -115,6 +114,41 @@ SDL_Texture* RenderManager :: loadTexture(const string &file, SDL_Renderer *ren)
 		logSDLError(cout, "LoadBMP");
 
 	return texture;
+}
+
+Resource* RenderManager::loadFromXML(tinyxml2::XMLElement *Element)
+{
+	if (Element)
+	{
+		Resource* Resource = new RenderResource();
+
+		for (tinyxml2::XMLAttribute* ElementAttrib = const_cast<tinyxml2::XMLAttribute*>(Element->FirstAttribute());
+			ElementAttrib; ElementAttrib = const_cast<tinyxml2::XMLAttribute*>(ElementAttrib->Next()))
+		{
+			std::string AttribName = ElementAttrib->Name();
+			std::string AttribValue = ElementAttrib->Value();
+
+			if (AttribName == "UID")
+			{
+				Resource->m_ResourceID = atoi(AttribValue.c_str());
+			}
+
+			if (AttribName == "filename")
+			{
+				Resource->m_FileName = AttribValue;
+			}
+
+			if (AttribName == "scenescope")
+			{
+				Resource->m_Scope = atoi(AttribValue.c_str());
+			}
+		}
+
+		return Resource;
+	}
+
+	return NULL;
+
 }
 
 void RenderManager :: renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y)

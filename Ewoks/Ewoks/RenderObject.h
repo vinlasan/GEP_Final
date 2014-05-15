@@ -5,23 +5,7 @@
 #include "ResourceManager.h"
 #include "SDL.h"
 
-class RenderResource : public Resource
-{
-public:
-	SDL_Texture* m_Texture;
-	SDL_Renderer* m_Renderer;
-
-	RenderResource();
-	~RenderResource();
-	void load();
-	void unload();
-
-protected:
-
-private:
-
-
-};
+class RenderManager;
 
 class RenderObject : public EngineObject
 {
@@ -43,6 +27,7 @@ public:
 	void setResourceObject();
 	void setColorKey(unsigned int r, unsigned intg, unsigned intb);
 	virtual void update() {};
+	virtual void HandleMessage(Telegram *telegram);
 };
 
 

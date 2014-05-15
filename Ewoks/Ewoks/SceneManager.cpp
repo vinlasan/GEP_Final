@@ -154,8 +154,87 @@ void sSceneManager::update()
 
 bool sSceneManager::loadFromXMLFile(std::string fileName)
 {
-	//TODO implement loadFromXMLFile this is here so project builds.
-	return true;
+	tinyxml2::XMLDocument doc;
+
+	std::list<stwoDLayer*> List;
+
+	if (doc.LoadFile(fileName.c_str()) == XML_NO_ERROR)
+	{
+		//Find resources node
+		XMLNode* ResourceTree = doc.RootElement();
+
+		if (ResourceTree)
+		{
+			//Enumerate resource objects
+			for (XMLNode* child = ResourceTree->FirstChild(); child; child = child->NextSibling())
+			{
+				XMLElement *Element = child->ToElement();
+
+				if (Element)
+				{
+					stwoDLayer *Layer = new stwoDLayer();
+					Layer->m_ZOrder = m_Layers.size();
+
+					for (XMLAttribute* ElementAttrib =
+						const_cast<XMLAttribute*>(Element->FirstAttribute());
+						ElementAttrib; ElementAttrib = const_cast<XMLAttribute*>(ElementAttrib->Next()))
+					{
+						//Examine layers
+						std::string AttribName = ElementAttrib->Name();
+						std::string AttribValue = ElementAttrib->Value();
+
+						//Detect resource type. Graphic? Audio? Text?
+						if (AttribName == "name")
+						{
+							Layer->m_Name = AttribValue;
+							continue;
+						}
+
+						if (AttribName == "posx")
+						{
+							Layer->m_PosX = atof(AttribValue.c_str());
+						}
+
+						if (AttribName == "posy")
+						{
+							Layer->m_PosY = atof(AttribValue.c_str());
+						}
+
+						if (AttribName == "visible")
+						{
+							if (AttribValue == "true")
+								Layer->m_Visible = true;
+							else
+								Layer->m_Visible = false;
+						}
+					}
+
+					m_Layers.push_back(Layer);
+
+					//Cycle through layer objects
+					for (XMLNode* objs = child->FirstChild(); objs; objs = objs->NextSibling())
+					{
+						if (std::string(objs->Value()) == "objects")
+						{
+							for (XMLNode* obj = objs->FirstChild(); obj; obj = obj->NextSibling())
+							{
+								XMLElement *ObjElement = obj->ToElement();
+
+								addLayerObjects(Layer, ObjElement);
+							}
+						}
+					}
+				}
+			}
+
+			sortLayers();
+			return true;
+		}
+	}
+
+
+
+	return false;
 }
 
 void sSceneManager::addTimer(unsigned int ID, DWORD Interval)

@@ -6,6 +6,8 @@
 #include <SDL_image.h>
 #include <SDL_syswm.h>
 #include <windows.h>
+#include <tinyxml2.h>
+#include "ResourceManager.h"
 
 using namespace std;
 
@@ -32,7 +34,7 @@ public:
 		int h, Uint32 flags);*/
 
 	//Load Texture
-	SDL_Texture* loadTexture(const string &file, SDL_Renderer *ren);
+	SDL_Texture* loadTexture(const string &file);
 
 	//Render Texture
 	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y);
@@ -42,6 +44,8 @@ public:
 	void clean();
 
 	HWND GetWindowHandle();
+
+	Resource* loadFromXML(tinyxml2::XMLElement *Element);
 
 protected:
 	static RenderManager m_RenderManager;

@@ -16,9 +16,9 @@
 #include "InputManager.h"
 #include "MyInputListener.h"
 #include "Messenger.h"
+#include "RenderObject.h"
 
 //For testing messenger
-#include "TestObj.h"
 
 #ifdef main
 # undef main
@@ -26,8 +26,8 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	ResourceManager* resourceManager = ResourceManager::GetResourceManager();
 	RenderManager* renderManager = RenderManager::GetRenderManager();
+	ResourceManager* resourceManager = ResourceManager::GetResourceManager();
 	sSceneManager* sceneManager = new sSceneManager();
 
 	if (renderManager->Initialize())
@@ -50,13 +50,21 @@ int _tmain(int argc, _TCHAR* argv[])
 	MyInputListener* myInputListener = new MyInputListener();
 	inputMan.AddListener(myInputListener);
 	
-	Messenger::GetMessenger().AddListener(new TestObj());
+	//Messenger::GetMessenger().AddListener(new TestObj());
 
 	SDL_RenderClear(renderManager->m_Renderer);
 	
 	renderManager->renderAllObjects();
 
 	//TODO add rendering loop here
+	for (size_t i = 0; i < resourceManager->getResourceCount(); i++)
+	{
+
+		RenderObject* RenderObject = new RenderObject();
+		//RenderObject->setResourceObject((RenderResource*)ResourceManager->findResourcebyID(i + 1));
+		//renderManager->RenderObjects.push_back(RenderObject);
+	}
+
 	while (true)
 	{
 		inputMan.Update();

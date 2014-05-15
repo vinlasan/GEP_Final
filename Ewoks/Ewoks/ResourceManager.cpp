@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ResourceManager.h"
+#include "RenderManager.h"
 
 ResourceManager ResourceManager::m_ResourceManager;
 
@@ -14,7 +15,7 @@ bool ResourceManager::loadFromXMLFile(std::string FileName)
 
 	if (doc.LoadFile(FileName.c_str()) == tinyxml2::XML_NO_ERROR)
 	{
-		tinyxml2::XMLNode* ResourceTree = doc.FirstChild();
+		tinyxml2::XMLNode* ResourceTree = doc.RootElement();
 
 		if (ResourceTree)
 		{
@@ -36,7 +37,7 @@ bool ResourceManager::loadFromXMLFile(std::string FileName)
 						{
 							if (AttribValue == "graphic")
 							{
-								//Render manager code here
+								Resource = RenderManager::GetRenderManager()->loadFromXML(Element);
 							}
 						}
 					}
