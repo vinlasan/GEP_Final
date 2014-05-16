@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Messenger.h"
 #include "Telegram.h"
+#include"SceneManager.h"
 
 Messenger &Messenger::GetMessenger()
 {
@@ -8,7 +9,7 @@ Messenger &Messenger::GetMessenger()
 	return instance;
 }
 
-void Messenger::AddListener(EngineObject *engineObject)
+void Messenger::AddListener(stwoDLayer *&engineObject)
 {
 	listeners.push_back(engineObject);
 }

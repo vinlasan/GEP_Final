@@ -29,7 +29,7 @@ public:
 	void setResourceObject(RenderResource* res);
 	void setColorKey(unsigned int r, unsigned intg, unsigned intb);
 	virtual void update() { };
-	virtual void HandleMessage(Telegram *telegram);
+	
 };
 
 

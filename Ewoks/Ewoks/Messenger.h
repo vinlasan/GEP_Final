@@ -3,6 +3,7 @@
 
 #include <list>
 #include "EngineObject.h"
+#include "SceneManager.h"
 
 class Telegram;
 
@@ -17,7 +18,7 @@ private:
 public:
 	static Messenger &GetMessenger();
 
-	void AddListener(EngineObject *engineObject);
+	void AddListener(stwoDLayer *&engineObject);
 
 	void AddMessage(Telegram *telegram);
 	void RemoveMessage(Telegram *telegram);
@@ -25,8 +26,8 @@ public:
 	void Send();
 
 private:
-	std::list<EngineObject*> listeners;
-	std::list<EngineObject*>::const_iterator listenersIt;
+	std::list<stwoDLayer*> listeners;
+	std::list<stwoDLayer*>::const_iterator listenersIt;
 
 	std::list<Telegram*> commands;
 	std::list<Telegram*>::const_iterator commandsIt;

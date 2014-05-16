@@ -10,8 +10,10 @@ private:
 	bool mainKey;
 	bool altKey;
 
-	Telegram *moveLeft = new Telegram(5);
-	Telegram *moveRight = new Telegram(-5);
+	Telegram *moveLeft = new Telegram(RIGHT, -5);
+	Telegram *moveRight = new Telegram(RIGHT,5);
+	Telegram *moveDown = new Telegram(UP,5);
+	Telegram *moveUp = new Telegram(UP,-5);
 
 public:
 	MyInputListener();

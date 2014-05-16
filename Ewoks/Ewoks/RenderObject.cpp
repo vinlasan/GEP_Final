@@ -47,9 +47,3 @@ void RenderObject::setColorKey(unsigned int r, unsigned int g, unsigned int b)
 	int success = SDL_SetColorKey(surface, -1, colorkey);
 	std::cout << "success value: " << success << "\n";
 }
-
-void RenderObject::HandleMessage(Telegram *telegram)
-{
-	m_PosX += telegram->Value;
-	std::cout << "I printe";
-}

@@ -19,14 +19,13 @@ bool MyInputListener::keyPressed(const OIS::KeyEvent &e)
 		Messenger::GetMessenger().AddMessage(moveLeft);
 		break;
 	case OIS::KC_RIGHT:
-	case OIS::KC_D:
 		Messenger::GetMessenger().AddMessage(moveRight);
 		break;
 	case OIS::KC_DOWN:
-	case OIS::KC_S:
+		Messenger::GetMessenger().AddMessage(moveDown);
 		break;
 	case OIS::KC_UP:
-	case OIS::KC_W:
+		Messenger::GetMessenger().AddMessage(moveUp);
 		break;
 	default:
 		break;
@@ -43,14 +42,13 @@ bool MyInputListener::keyReleased(const OIS::KeyEvent &e)
 		Messenger::GetMessenger().RemoveMessage(moveLeft);
 		break;
 	case OIS::KC_RIGHT:
-	case OIS::KC_D:
 		Messenger::GetMessenger().RemoveMessage(moveRight);
 		break;
 	case OIS::KC_DOWN:
-	case OIS::KC_S:
+		Messenger::GetMessenger().RemoveMessage(moveDown);
 		break;
 	case OIS::KC_UP:
-	case OIS::KC_W:
+		Messenger::GetMessenger().RemoveMessage(moveUp);
 		break;
 	default:
 		break;

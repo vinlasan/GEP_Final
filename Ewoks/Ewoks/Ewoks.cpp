@@ -64,7 +64,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	sceneManager->addTimer(0, 2000);
 
-	std::list<stwoDLayer*>::const_iterator it;
+	/*std::list<stwoDLayer*>::const_iterator it;
 	for (it = sceneManager->m_Layers.begin(); it != sceneManager->m_Layers.end(); it++)
 	{
 		std::list<sSceneObject*>::const_iterator is;
@@ -72,7 +72,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			Messenger::GetMessenger().AddListener(*is);
 		}
-	}
+	}*/
 	
 
 	renderManager->renderAllObjects();
@@ -82,7 +82,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		inputMan.Update();
 		Messenger::GetMessenger().Send();
 		sceneManager->update();
-		renderManager->renderAllObjects();
 	}
 	SDL_RenderClear(renderManager->m_Renderer);
 	//system("PAUSE");

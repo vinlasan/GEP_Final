@@ -150,9 +150,14 @@ void RenderManager::renderScene()
 				Pos.y = int(Layer->m_PosY) + int(Object->m_PosY);
 				Pos.w = int(Object->m_RenderRect.w);
 				Pos.h = int(Object->m_RenderRect.h);
-				
+				(Object->m_PosX) = Layer->m_PosX;
+				Object->m_PosY = Layer->m_PosY;
+				Object->m_RenderRect.y = Object->m_PosY;
+				Object->m_RenderRect.x = Object->m_PosX;
 
-				SDL_RenderCopy(this->m_Renderer, Object->m_RenderResource->m_Texture,
+				renderTexture(Object->renderResource->m_Texture, this->m_Renderer, Object->m_PosX,
+					Object->m_PosY);
+				SDL_RenderCopy(this->m_Renderer, Object->renderResource ->m_Texture,
 					&Object->m_RenderRect, &Pos);
 			}
 

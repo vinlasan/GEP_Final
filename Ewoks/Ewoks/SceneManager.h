@@ -55,9 +55,8 @@ public:
 	SDL_Rect m_RenderRect;
 	SDL_Color m_ColorKey;
 	bool m_bColorKeyEnabled;
-	RenderResource *m_RenderResource;
-	bool m_bVisible;
 	void update();
+	
 	
 };
 
@@ -71,7 +70,7 @@ public:
 	std::string m_Name;
 	std::list<sSceneObject*> m_SceneObjects;
 	void update();
-	
+	virtual void HandleMessage(Telegram *telegram);
 };
 
 class sSceneManager

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 #include "Telegram.h"
+#include "Messenger.h"
 
 using namespace tinyxml2;
 
@@ -45,6 +46,21 @@ stwoDLayer::stwoDLayer()
 	m_Visible = true;
 	m_PosX = m_PosY = 0.0f;
 	m_ZOrder = 0;
+}
+
+void stwoDLayer::HandleMessage(Telegram *telegram)
+{
+	if (telegram->Direction == UP)
+	{
+		this->m_PosY += telegram->Value;
+		std::cout << this->m_PosY;
+	}
+	else if (telegram->Direction == RIGHT)
+	{
+		this->m_PosX += telegram->Value;
+		std::cout << this->m_PosX;
+	}
+	
 }
 
 stwoDLayer* sSceneManager::addLayer(std::string Name)
@@ -140,6 +156,7 @@ void sSceneManager::addLayerObjects(stwoDLayer *Layer, XMLElement *Element)
 		Object->setColorKey(r, g, b);*/
 
 	Layer->m_SceneObjects.push_back(Object);
+	Messenger::GetMessenger().AddListener(Layer);
 }
 
 bool sSceneManager::checkCollision(SDL_Rect* A, SDL_Rect* B)
@@ -293,3 +310,4 @@ void sSceneObject::update()
 {
 
 }
+
