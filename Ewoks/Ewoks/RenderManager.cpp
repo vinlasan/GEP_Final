@@ -232,8 +232,45 @@ void RenderManager :: renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, 
 
 void RenderManager :: renderAllObjects()
 {
-	SDL_RenderPresent(m_Renderer);
-	SDL_Delay(3000);
+	//std::list<cSDLRenderObject*>::iterator list_it;
+
+	//Hard coded values
+	const int x_increment = 5;
+	static int xpos = 0;
+	static int ypos = 0;
+	// Render all assoicated render objects
+	for (auto &list_it : m_RenderObjects)
+	{
+		// HIghly ineffiecnet
+		/*for (auto *s : this->m_SceneManager->m_Layers)
+		for (auto *so : s->m_SceneObjects)
+		if (so->m_RenderResource == list_it->m_RenderResource)
+		curScene = so;*/
+
+		// Highly efficent
+		//curScene = list_it->GetCurrentScene();
+
+		if (list_it->m_bVisible)
+		{
+			list_it->update();
+
+			SDL_Rect Pos = list_it->m_RenderRect;
+			Pos.x = list_it->m_PosX;
+			Pos.y = list_it->m_PosY;
+
+			std::cout << Pos.x;
+			SDL_RenderCopy(this->m_Renderer, list_it->renderResource->m_Texture , &(list_it->m_RenderRect), &Pos);
+
+			/*if (list_it->m_RenderResource->m_FileName == "spaceship.bmp")
+			{
+			xpos += x_increment;
+			if (xpos + Pos.w > 640 + Pos.w)
+			xpos = -200;
+			}*/
+		}
+	}
+
+	SDL_RenderPresent(this->m_Renderer);
 }
 
 void RenderManager :: clean()

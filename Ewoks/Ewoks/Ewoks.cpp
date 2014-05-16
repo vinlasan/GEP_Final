@@ -42,7 +42,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	resourceManager->loadFromXMLFile("ResourceTree.xml");
 	
-	//Messenger::GetMessenger().AddListener(new TestObj());
 
 	//TODO add rendering loop here
 	for (size_t i = 0; i < resourceManager->getResourceCount(); i++)
@@ -50,6 +49,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		RenderObject* renderObject = new RenderObject();
 		renderObject->setResourceObject((RenderResource*)resourceManager->findResourcebyID(i + 1));
+		resourceManager->setCurrentScope(0);
 		renderManager->m_RenderObjects.push_back(renderObject);
 	}
 
@@ -64,6 +64,17 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	sceneManager->addTimer(0, 2000);
 
+	std::list<stwoDLayer*>::const_iterator it;
+	for (it = sceneManager->m_Layers.begin(); it != sceneManager->m_Layers.end(); it++)
+	{
+		std::list<sSceneObject*>::const_iterator is;
+		for (is = (*it)->m_SceneObjects.begin(); is != (*it)->m_SceneObjects.end(); is++)
+		{
+			Messenger::GetMessenger().AddListener(*is);
+		}
+	}
+	
+
 	renderManager->renderAllObjects();
 
 	while (renderManager->update())
@@ -71,6 +82,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		inputMan.Update();
 		Messenger::GetMessenger().Send();
 		sceneManager->update();
+		renderManager->renderAllObjects();
 	}
 	SDL_RenderClear(renderManager->m_Renderer);
 	//system("PAUSE");

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "RenderManager.h"
 #include "RenderObject.h"
+#include "Telegram.h"
 
 RenderObject::RenderObject()
 {
@@ -18,8 +19,11 @@ void RenderObject::setResourceObject(RenderResource* res)
 	{
 		renderResource = res;
 
+		renderResource->m_Renderer = RenderManager::GetRenderManager()->m_Renderer;
+		ResourceManager::GetResourceManager()->setCurrentScope(0);
+
 		int w, h;
-		SDL_QueryTexture(res->m_Texture, NULL, NULL, &w, &h);
+		SDL_QueryTexture(renderResource->m_Texture, NULL, NULL, &w, &h);
 
 		m_RenderRect.w = w;
 		m_RenderRect.h = h;
@@ -42,4 +46,10 @@ void RenderObject::setColorKey(unsigned int r, unsigned int g, unsigned int b)
 	Uint32 colorkey = SDL_MapRGB(surface->format, m_ColorKey.r, m_ColorKey.g, m_ColorKey.b);
 	int success = SDL_SetColorKey(surface, -1, colorkey);
 	std::cout << "success value: " << success << "\n";
+}
+
+void RenderObject::HandleMessage(Telegram *telegram)
+{
+	m_PosX += telegram->Value;
+	std::cout << "I printe";
 }

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SceneManager.h"
+#include "Telegram.h"
 
 using namespace tinyxml2;
 
@@ -97,7 +98,8 @@ void sSceneManager::addLayerObjects(stwoDLayer *Layer, XMLElement *Element)
 		if (AttribName == "resourceID")
 		{
 			ResourceManager* resourceManager = ResourceManager::GetResourceManager();
-			Object->setResourceObject((RenderResource*)resourceManager->findResourcebyID(atoi(AttribValue.c_str())));
+			RenderResource *ren = (RenderResource*)resourceManager->findResourcebyID(atoi(AttribValue.c_str()));
+			Object->setResourceObject(ren);
 		}
 
 		if (AttribName == "posx")

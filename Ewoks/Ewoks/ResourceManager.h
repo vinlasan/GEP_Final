@@ -9,6 +9,14 @@
 
 #include <tinyxml2.h>
 
+typedef enum{
+	RESOURCE_NULL = 0,
+	RESOURCE_GRAPHIC = 1,
+	RESOURCE_MOVIE = 2,
+	RESOURCE_AUDIO = 3,
+	RESOURCE_TEXT = 4,
+} RESOURCE_TYPE;
+
 class Resource : public EngineObject
 {
 public:
@@ -49,9 +57,12 @@ public:
 
 	Resource* findResourcebyID(unsigned int UID);
 
+	void setCurrentScope(unsigned int Scope);
+
 protected:
 	static ResourceManager m_ResourceManager;
 	unsigned int m_ResourceCount;
+	unsigned int m_CurrentScope;
 
 private:
 

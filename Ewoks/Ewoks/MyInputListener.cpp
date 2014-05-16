@@ -16,7 +16,6 @@ bool MyInputListener::keyPressed(const OIS::KeyEvent &e)
 	switch (e.key)
 	{
 	case OIS::KC_LEFT:
-	case OIS::KC_A:
 		Messenger::GetMessenger().AddMessage(moveLeft);
 		break;
 	case OIS::KC_RIGHT:
@@ -41,7 +40,6 @@ bool MyInputListener::keyReleased(const OIS::KeyEvent &e)
 	switch (e.key)
 	{
 	case OIS::KC_LEFT:
-	case OIS::KC_A:
 		Messenger::GetMessenger().RemoveMessage(moveLeft);
 		break;
 	case OIS::KC_RIGHT:

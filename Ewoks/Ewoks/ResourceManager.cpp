@@ -77,3 +77,24 @@ bool ResourceManager::loadFromXMLFile(std::string FileName)
 
 	return false;
 }
+
+void ResourceManager::setCurrentScope(unsigned int Scope)
+{
+	if (m_CurrentScope != 0)
+	{
+		std::list<Resource*>::iterator list_it;
+
+		for (list_it = m_Resources[m_CurrentScope].begin(); list_it != m_Resources[m_CurrentScope].end(); list_it++)
+			(*list_it)->unload();
+	}
+
+	m_CurrentScope = Scope;
+
+	//Load new scope.
+	std::list<Resource*>::iterator list_it;
+
+	for (list_it = m_Resources[m_CurrentScope].begin(); list_it != m_Resources[m_CurrentScope].end(); list_it++)
+	{
+		(*list_it)->load();
+	}
+}

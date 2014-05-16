@@ -5,5 +5,5 @@
 
 void EngineObject::HandleMessage(Telegram *telegram)
 {
-	std::cout << telegram->Value;
+
 }

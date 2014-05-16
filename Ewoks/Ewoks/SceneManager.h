@@ -58,9 +58,10 @@ public:
 	RenderResource *m_RenderResource;
 	bool m_bVisible;
 	void update();
+	
 };
 
-class stwoDLayer
+class stwoDLayer : public EngineObject 
 {
 public:
 	stwoDLayer();
@@ -70,6 +71,7 @@ public:
 	std::string m_Name;
 	std::list<sSceneObject*> m_SceneObjects;
 	void update();
+	
 };
 
 class sSceneManager
